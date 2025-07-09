@@ -1,0 +1,135 @@
+.user-profile {
+	position: relative;
+	text-align: center;
+	width: 100%;
+
+	&__container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 370px;
+		margin: 0 auto;
+	}
+
+	&__avatar-image {
+		position: relative;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 180px;
+		height: 180px;
+	}
+
+	&__role-badge {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 40px;
+		height: 40px;
+		font-size: 30px;
+		background-color: #00cf00;
+		border-radius: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__role-with-name {
+		&-name {
+			font-weight: bold;
+			font-size: 26px;
+		}
+	}
+
+	&__meta {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		color: #434343;
+		font-weight: 300;
+	}
+
+	&__nickname,
+	&__last-login {
+		font-size: 18px;
+	}
+
+	&__stats {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		justify-content: space-between;
+	}
+
+	&__stat {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&--meetings {
+			border-left: 2px solid #434343;
+			border-right: 2px solid #434343;
+		}
+	}
+
+	&__stat-value {
+		font-weight: bold;
+		font-size: 24px;
+	}
+
+	&__stat-label {
+		font-size: 18px;
+		color: #434343;
+	}
+
+	&__footer {
+		display: grid;
+		grid-template-columns: auto 122px;
+		grid-template-rows: 60px;
+		align-items: center;
+		gap: 11px;
+	}
+
+	&__city,
+	&__settings {
+		background-color: #fff;
+		border-radius: 25px;
+		padding: 15px 0px;
+		height: 60px;
+	}
+
+	&__city {
+		border: 3px solid #fff;
+		font-size: 22px;
+	}
+
+	&__settings {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 3px solid #a7a7a7;
+		cursor: pointer;
+		transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+
+		img {
+			margin-right: 5px;
+		}
+
+		span {
+			color: #a7a7a7;
+			font-size: 16px;
+		}
+
+		&:hover {
+			background: #f0f0f0;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+			transform: scale(1.04);
+		}
+
+		&:active {
+			background: #e0e0e0;
+			transform: scale(0.98);
+		}
+	}
+}

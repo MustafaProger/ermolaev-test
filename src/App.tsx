@@ -7,7 +7,9 @@ import store from "./store/store";
 function App() {
 	return (
 		<Provider store={store}>
-			<UserProfile />
+			<div className='container'>
+				<UserProfile />
+			</div>
 		</Provider>
 	);
 }
