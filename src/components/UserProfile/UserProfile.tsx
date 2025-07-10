@@ -47,8 +47,8 @@ const UserProfile = () => {
 
 	return (
 		<div className='user-profile'>
-			<ProfileHeaderPanel />
 			<div className='user-profile__container'>
+				<ProfileHeaderPanel />
 				<div className='user-profile__avatar-block'>
 					<div className='user-profile__avatar-image'>
 						<img

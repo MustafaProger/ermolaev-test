@@ -57,3 +57,35 @@
 	background: #e5e5e5;
 	margin: 0 15px;
 }
+
+.calls-block__arrow {
+	transition: transform 0.3s ease;
+}
+
+.calls-block__arrow--rotated {
+	transform: rotate(180deg);
+}
+
+.calls-block__content {
+	padding: 10px 20px;
+	background-color: #f9f9f9;
+	border-top: 1px solid #e5e5e5;
+	animation: fadeIn 0.3s ease;
+}
+
+.calls-block__content-item {
+	margin-bottom: 6px;
+	font-size: 16px;
+	color: #333;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
