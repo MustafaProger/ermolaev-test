@@ -3,10 +3,11 @@ import { ru } from "date-fns/locale";
 import "./UserProfile.scss";
 
 import { useSelector } from "react-redux";
+import type { UserProfileData } from "../../interface/interface";
 
 import settings from "../../assets/icons/settings.svg";
 import ProfileHeaderPanel from "../ProfileHeaderPanel/ProfileHeaderPanel";
-import type { RootState } from "../../store/store";
+import CallsBlock from "../CallsBlock/CallsBlock";
 
 const roleForAvatar: Record<string, string> = {
 	roomer: "Р",
@@ -29,7 +30,9 @@ const UserProfile = () => {
 		meetings,
 		roomers,
 		city,
-	} = useSelector((state: RootState) => state);
+		calling_limit,
+		going_limit,
+	} = useSelector((state: UserProfileData) => state);
 
 	const loginDate = new Date(last_login_at);
 	let formattedLogin = "";
@@ -96,6 +99,10 @@ const UserProfile = () => {
 						<span>РЕДАКТ</span>
 					</button>
 				</div>
+				<CallsBlock
+					calls={calling_limit}
+					going={going_limit}
+				/>
 			</div>
 		</div>
 	);

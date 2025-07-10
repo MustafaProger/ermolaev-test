@@ -40,6 +40,4 @@ function reducer(state = initialStore, action: { type: string }) {
 
 const store = createStore(reducer);
 
-export type RootState = UserProfileData;
-
 export default store;

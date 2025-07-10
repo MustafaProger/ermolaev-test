@@ -23,3 +23,9 @@ export interface UserProfileData {
 	meetings: number;
 	roomers: number;
 }
+
+
+export interface CallsBlockProps {
+	calls?: number;
+	going?: number;
+}
