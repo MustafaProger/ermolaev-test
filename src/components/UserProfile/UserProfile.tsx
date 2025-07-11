@@ -8,6 +8,11 @@ import type { UserProfileData } from "../../interface/interface";
 import settings from "../../assets/icons/settings.svg";
 import ProfileHeaderPanel from "../ProfileHeaderPanel/ProfileHeaderPanel";
 import CallsBlock from "../CallsBlock/CallsBlock";
+import ProfileCard from "../ProfileCard/ProfileCard";
+
+import HistoryIcon from "../../assets/icons/history.svg";
+import EyeIcon from "../../assets/icons/eye.svg";
+import AdultIcon from "../../assets/icons/adult.svg";
 
 const roleForAvatar: Record<string, string> = {
 	roomer: "Р",
@@ -99,16 +104,46 @@ const UserProfile = () => {
 						<span>РЕДАКТ</span>
 					</button>
 				</div>
+
 				<CallsBlock
 					calls={calling_limit}
 					going={going_limit}
 				/>
-				<div className="user-profile__buttons">
-					<button className="user-profile__buttons-create">
-						СОЗДАТЬ ИГРУМ
-					</button>
-					<button className="user-profile__buttons-my">МОИ ИГРУМЫ</button>
+
+				<div className='profile-card'>
+					<div className='profile-card-list-item'>
+						<span className='profile-card-list-icon'>
+							<img
+								src={HistoryIcon}
+								alt='История'
+							/>
+						</span>
+						<span className='profile-card-title'>ИСТОРИЯ ВСТРЕЧ</span>
+					</div>
 				</div>
+
+				<ProfileCard
+					items={[
+						{
+							icon: (
+								<img
+									src={EyeIcon}
+									alt='Публичный аккаунт'
+								/>
+							),
+							text: "Публичный аккаунт",
+						},
+						{
+							icon: (
+								<img
+									src={AdultIcon}
+									alt='Взрослый'
+								/>
+							),
+							text: "Взрослый",
+						},
+					]}
+				/>
 			</div>
 		</div>
 	);
