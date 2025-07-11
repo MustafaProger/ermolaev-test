@@ -24,8 +24,26 @@ export interface UserProfileData {
 	roomers: number;
 }
 
-
 export interface CallsBlockProps {
 	calls?: number;
 	going?: number;
+}
+
+export interface ProfileCardItem {
+	icon?: React.ReactNode;
+	text: string;
+	onClick?: () => void;
+}
+
+export interface ProfileCardProps {
+	icon?: string;
+	items?: ProfileCardItem[];
+	children?: React.ReactNode;
+	className?: string;
+}
+
+export interface ProfileBioCardProps {
+  bio: string;
+  telegram: string;
+  onClick?: () => void;
 }

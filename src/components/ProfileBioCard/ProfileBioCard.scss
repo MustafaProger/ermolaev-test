@@ -1,0 +1,67 @@
+.profile-bio-card {
+	background: #fff;
+	border-radius: 24px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-bio-card__top {
+	display: flex;
+	gap: 8px;
+	cursor: pointer;
+	align-items: flex-end;
+}
+
+.profile-bio-card__bio {
+	font-size: 14px;
+	line-height: 1.5;
+	text-align: left;
+	word-break: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: justify;
+}
+
+.profile-bio-card__bio.expanded {
+	-webkit-line-clamp: unset;
+	overflow: visible;
+	display: block;
+}
+
+.profile-bio-card__arrow {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s ease;
+	transform: rotate(-90deg);
+}
+
+.profile-bio-card__arrow.rotated {
+	transform: rotate(-180deg);
+}
+
+.profile-bio-card__divider {
+	border: none;
+	border-top: 1px solid #e0e0e0;
+	margin: 16px 0;
+}
+
+.profile-bio-card__bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.profile-bio-card__label {
+	font-size: 16px;
+	color: #222;
+}
+
+.profile-bio-card__telegram {
+	font-size: 16px;
+	font-weight: 700;
+	color: #222;
+}

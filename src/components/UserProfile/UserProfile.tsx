@@ -13,6 +13,10 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import HistoryIcon from "../../assets/icons/history.svg";
 import EyeIcon from "../../assets/icons/eye.svg";
 import AdultIcon from "../../assets/icons/adult.svg";
+import CheckIcon from "../../assets/icons/check.svg";
+import BlockIcon from "../../assets/icons/block.svg";
+import BookmarkIcon from "../../assets/icons/bookmark.svg";
+import ProfileBioCard from "../ProfileBioCard/ProfileBioCard";
 
 const roleForAvatar: Record<string, string> = {
 	roomer: "Р",
@@ -37,6 +41,8 @@ const UserProfile = () => {
 		city,
 		calling_limit,
 		going_limit,
+		telegram,
+		about
 	} = useSelector((state: UserProfileData) => state);
 
 	const loginDate = new Date(last_login_at);
@@ -125,24 +131,27 @@ const UserProfile = () => {
 				<ProfileCard
 					items={[
 						{
-							icon: (
-								<img
-									src={EyeIcon}
-									alt='Публичный аккаунт'
-								/>
-							),
+							icon: EyeIcon,
 							text: "Публичный аккаунт",
 						},
 						{
-							icon: (
-								<img
-									src={AdultIcon}
-									alt='Взрослый'
-								/>
-							),
+							icon: AdultIcon,
 							text: "Взрослый",
 						},
 					]}
+				/>
+
+				<ProfileCard
+					items={[
+						{ icon: CheckIcon, text: "Мои подписки" },
+						{ icon: BlockIcon, text: "Чёрный список" },
+						{ icon: BookmarkIcon, text: "Закладки" },
+					]}
+				/>
+
+				<ProfileBioCard
+					telegram={telegram}
+					bio={about}
 				/>
 			</div>
 		</div>

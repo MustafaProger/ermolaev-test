@@ -1,18 +1,7 @@
 import React from "react";
 import "./ProfileCard.scss";
 
-interface ProfileCardItem {
-	icon?: React.ReactNode;
-	text: string;
-	onClick?: () => void;
-}
-
-interface ProfileCardProps {
-	icon?: React.ReactNode;
-	items?: ProfileCardItem[];
-	children?: React.ReactNode;
-	className?: string;
-}
+import type { ProfileCardProps } from "../../interface/interface";
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
 	items,
@@ -28,7 +17,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 						key={`${item.text}-${idx}`}
 						onClick={item.onClick}>
 						{item.icon && (
-							<span className='profile-card-list-icon'>{item.icon}</span>
+							<span className='profile-card-list-icon'>
+								<img
+									src={String(item.icon)}
+									alt=''
+								/>
+							</span>
 						)}
 						<span>{item.text}</span>
 					</div>

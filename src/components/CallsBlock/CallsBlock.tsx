@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import arrowIcon from "../../assets/icons/Vector.svg";
+import arrowIcon from "../../assets/icons/arrow.svg";
 import "./CallsBlock.scss";
+
 import type { CallsBlockProps } from "../../interface/interface";
 
 const CallsBlock: React.FC<CallsBlockProps> = ({ calls = 2, going = 3 }) => {
