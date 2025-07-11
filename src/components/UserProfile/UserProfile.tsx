@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { format, isToday, isYesterday } from "date-fns";
 import { ru } from "date-fns/locale";
 import "./UserProfile.scss";
 
-import { useSelector } from "react-redux";
-import type { UserProfileData } from "../../interface/interface";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProfile } from "../../store/actions";
+import type { RootState } from "../../store/store";
 
 import settings from "../../assets/icons/settings.svg";
 import ProfileHeaderPanel from "../ProfileHeaderPanel/ProfileHeaderPanel";
@@ -47,31 +49,105 @@ const DotIcon = () => (
 );
 
 const UserProfile = () => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dispatch = useDispatch<any>();
+	const profile = useSelector((state: RootState) => state.profile);
+	const loading = useSelector((state: RootState) => state.loading);
+	const error = useSelector((state: RootState) => state.error);
+
+	const { monthsInApp, meetings, roomers, avatar  } = profile || {};
+
 	const {
-		avatar_url,
 		role,
 		name,
 		nickname,
 		last_login_at,
-		monthsInApp,
-		meetings,
-		roomers,
-		city,
 		calling_limit,
 		going_limit,
+		city,
 		telegram,
 		about,
-	} = useSelector((state: UserProfileData) => state);
+	} = profile?.data || {};
 
-	const loginDate = new Date(last_login_at);
+	useEffect(() => {
+		dispatch(fetchProfile("5e800be0-088e-41cb-b549-10ebf4a13591"));
+	}, [dispatch]);
+
+	console.log("Profile data:", profile);
+
+	if (!profile) {
+		return (
+			<div className='user-profile'>
+				<div
+					className='user-profile__container'
+					style={{ textAlign: "center", padding: "50px" }}>
+					<div style={{ fontSize: "18px", color: "#666" }}>
+						Загрузка профиля...
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	let formattedLogin = "";
 
-	if (isToday(loginDate)) {
-		formattedLogin = `сегодня, ${format(loginDate, "HH:mm")}`;
-	} else if (isYesterday(loginDate)) {
-		formattedLogin = `вчера, ${format(loginDate, "HH:mm")}`;
-	} else {
-		formattedLogin = format(loginDate, "d MMMM yyyy, HH:mm", { locale: ru });
+	try {
+		const loginDate = last_login_at ? new Date(last_login_at) : null;
+
+		if (!loginDate || isNaN(loginDate.getTime())) {
+			formattedLogin = "недавно";
+		} else if (isToday(loginDate)) {
+			formattedLogin = `сегодня, ${format(loginDate, "HH:mm")}`;
+		} else if (isYesterday(loginDate)) {
+			formattedLogin = `вчера, ${format(loginDate, "HH:mm")}`;
+		} else {
+			formattedLogin = format(loginDate, "d MMMM yyyy, HH:mm", { locale: ru });
+		}
+	} catch (error) {
+		console.error("Ошибка форматирования даты:", error);
+		formattedLogin = "недавно";
+	}
+
+	if (loading) {
+		return (
+			<div className='user-profile'>
+				<div className='user-profile__container'>
+					<div style={{ textAlign: "center", padding: "50px" }}>
+						<div style={{ fontSize: "18px", color: "#666" }}>
+							Загрузка профиля...
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	// Показываем ошибку
+	if (error) {
+		return (
+			<div className='user-profile'>
+				<div className='user-profile__container'>
+					<div style={{ textAlign: "center", padding: "50px" }}>
+						<div style={{ fontSize: "18px", color: "#e74c3c" }}>{error}</div>
+						<button
+							onClick={() =>
+								dispatch(fetchProfile("5e800be0-088e-41cb-b549-10ebf4a13591"))
+							}
+							style={{
+								marginTop: "20px",
+								padding: "10px 20px",
+								backgroundColor: "#007bff",
+								color: "white",
+								border: "none",
+								borderRadius: "5px",
+								cursor: "pointer",
+							}}>
+							Попробовать снова
+						</button>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	return (
@@ -81,19 +157,19 @@ const UserProfile = () => {
 				<div className='user-profile__avatar-block'>
 					<div className='user-profile__avatar-image'>
 						<img
-							src={avatar_url}
+							src={avatar}
 							alt={`Аватар пользователя ${name}`}
 						/>
 						<p
 							className={`user-profile__role-badge user-profile__role-badge--${role}`}>
-							{roleForAvatar[role] || "?"}
+							{role ? roleForAvatar[role] || "?" : "?"}
 						</p>
 					</div>
 				</div>
 
 				<p className='user-profile__role-with-name'>
 					<span className='user-profile__role-with-name-role'>
-						{roleForName[role]}:
+						{role ? roleForName[role] : "роль"}:
 					</span>{" "}
 					<span className='user-profile__role-with-name-name'>{name}</span>
 				</p>
@@ -119,7 +195,9 @@ const UserProfile = () => {
 				</div>
 
 				<div className='user-profile__footer'>
-					<p className='user-profile__city'>{city.name}</p>
+					<p className='user-profile__city'>
+						{city?.name || "Город не указан"}
+					</p>
 					<button className='user-profile__settings'>
 						<img
 							src={settings}
@@ -168,8 +246,8 @@ const UserProfile = () => {
 				/>
 
 				<ProfileBioCard
-					telegram={telegram}
-					bio={about}
+					telegram={telegram || ""}
+					bio={about || ""}
 				/>
 
 				<ProfileCard
