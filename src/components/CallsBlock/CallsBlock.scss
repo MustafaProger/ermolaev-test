@@ -68,8 +68,6 @@
 
 .calls-block__content {
 	padding: 10px 20px;
-	background-color: #f9f9f9;
-	border-top: 1px solid #e5e5e5;
 	animation: fadeIn 0.3s ease;
 }
 
@@ -88,4 +86,9 @@
 		opacity: 1;
 		transform: translateY(0);
 	}
+}
+
+.calls-block__divider {
+	height: 1px;
+	background-color: #e0e0e0;
 }

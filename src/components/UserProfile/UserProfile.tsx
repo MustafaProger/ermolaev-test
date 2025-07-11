@@ -103,6 +103,12 @@ const UserProfile = () => {
 					calls={calling_limit}
 					going={going_limit}
 				/>
+				<div className="user-profile__buttons">
+					<button className="user-profile__buttons-create">
+						СОЗДАТЬ ИГРУМ
+					</button>
+					<button className="user-profile__buttons-my">МОИ ИГРУМЫ</button>
+				</div>
 			</div>
 		</div>
 	);

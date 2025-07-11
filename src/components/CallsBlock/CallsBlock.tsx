@@ -60,6 +60,9 @@ const CallsBlock: React.FC<CallsBlockProps> = ({ calls = 2, going = 3 }) => {
 							))}
 						</div>
 					)}
+					{item.key !== items[items.length - 1].key && (
+						<div className='calls-block__divider' />
+					)}
 				</React.Fragment>
 			))}
 		</div>
