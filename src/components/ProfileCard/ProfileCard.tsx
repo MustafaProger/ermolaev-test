@@ -17,11 +17,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 						key={`${item.text}-${idx}`}
 						onClick={item.onClick}>
 						{item.icon && (
-							<span className='profile-card-list-icon'>
-								<img
-									src={String(item.icon)}
-									alt=''
-								/>
+							<span
+								className={`profile-card-list-icon ${
+									typeof item.icon === "object" ? "profile-card-list-icon_dot" : ""
+								}`}>
+								{typeof item.icon === "object" ? (
+									item.icon
+								) : (
+									<img
+										src={String(item.icon)}
+										alt=''
+									/>
+								)}
 							</span>
 						)}
 						<span>{item.text}</span>

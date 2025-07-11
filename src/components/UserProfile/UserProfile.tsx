@@ -16,6 +16,8 @@ import AdultIcon from "../../assets/icons/adult.svg";
 import CheckIcon from "../../assets/icons/check.svg";
 import BlockIcon from "../../assets/icons/block.svg";
 import BookmarkIcon from "../../assets/icons/bookmark.svg";
+import LogoutIcon from "../../assets/icons/logout.svg";
+
 import ProfileBioCard from "../ProfileBioCard/ProfileBioCard";
 
 const roleForAvatar: Record<string, string> = {
@@ -27,6 +29,22 @@ const roleForName: { [key: string]: string } = {
 	roomer: "румер",
 	groomer: "грумер",
 };
+
+const DotIcon = () => (
+	<span
+		style={{
+			width: 10,
+			height: 10,
+			minWidth: 10,
+			minHeight: 10,
+			borderRadius: "50%",
+			backgroundColor: "#ccc",
+			display: "inline-block",
+			verticalAlign: "middle",
+			marginTop: 1,
+		}}
+	/>
+);
 
 const UserProfile = () => {
 	const {
@@ -42,7 +60,7 @@ const UserProfile = () => {
 		calling_limit,
 		going_limit,
 		telegram,
-		about
+		about,
 	} = useSelector((state: UserProfileData) => state);
 
 	const loginDate = new Date(last_login_at);
@@ -153,6 +171,29 @@ const UserProfile = () => {
 					telegram={telegram}
 					bio={about}
 				/>
+
+				<ProfileCard
+					items={[
+						{ icon: <DotIcon />, text: "Возможновти ИГРУМА" },
+						{ icon: <DotIcon />, text: "Правила ИГРУМА" },
+						{ icon: <DotIcon />, text: "Инструкция РУМЕРА" },
+						{ icon: <DotIcon />, text: "Инструкция МАСТЕРА" },
+						{ icon: <DotIcon />, text: "Инструкция МЕСТА" },
+						{ icon: <DotIcon />, text: "Пользовательское соглашение" },
+					]}
+				/>
+
+				<div className='profile-card'>
+					<div className='profile-card-list-item'>
+						<span className='profile-card-list-icon'>
+							<img
+								src={LogoutIcon}
+								alt='выход'
+							/>
+						</span>
+						<span className='profile-card-title'>Выйти из профиля</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

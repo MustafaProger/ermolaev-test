@@ -37,4 +37,6 @@ const ProfileBioCard: React.FC<ProfileBioCardProps> = ({
 	);
 };
 
+
+
 export default ProfileBioCard;
